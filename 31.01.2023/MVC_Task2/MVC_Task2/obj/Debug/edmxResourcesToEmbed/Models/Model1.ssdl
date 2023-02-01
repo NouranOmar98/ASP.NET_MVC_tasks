@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="255" />
+    <Property Name="Description" Type="varchar" MaxLength="225" />
+  </EntityType>
+  <EntityType Name="Prpducts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="255" />
+    <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="UnitsInStock" Type="int" />
+    <Property Name="categoryID" Type="int" />
+  </EntityType>
+  <Association Name="FK__Prpducts__catego__398D8EEE">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="Prpducts" Type="Self.Prpducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prpducts">
+        <PropertyRef Name="categoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prpducts" EntityType="Self.Prpducts" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Prpducts__catego__398D8EEE" Association="Self.FK__Prpducts__catego__398D8EEE">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Prpducts" EntitySet="Prpducts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
