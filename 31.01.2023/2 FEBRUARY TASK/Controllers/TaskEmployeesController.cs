@@ -125,6 +125,7 @@ namespace _2_FEBRUARY_TASK.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(taskEmployee);
         }
 
@@ -133,15 +134,34 @@ namespace _2_FEBRUARY_TASK.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,First_Name,Last_Name,Email,Phone,Age,Job_Title,Gender")] TaskEmployee taskEmployee)
+        public ActionResult Edit(TaskEmployee taskEmployee, HttpPostedFileBase img, HttpPostedFileBase File)
         {
+            TaskEmployee emp = db.TaskEmployees.Find(taskEmployee.Id);
+
+            if ( img!= null)
+            {
+                string path = Server.MapPath("../../Images/") + img.FileName;
+                img.SaveAs(path);
+                emp.img = img.FileName;
+            }
+
+            if (File != null)
+            {
+                string path = Server.MapPath("../../CV/") + File.FileName;
+                File.SaveAs(path);
+                emp.PdfFile = File.FileName;
+            }
+
+
             if (ModelState.IsValid)
             {
-                db.Entry(taskEmployee).State = EntityState.Modified;
+                //db.Entry(taskEmployee).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(taskEmployee);
+
         }
 
         // GET: TaskEmployees/Delete/5

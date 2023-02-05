@@ -47,9 +47,11 @@ namespace _2_FEBRUARY_TASK.Models
         //
         public Nullable<bool> Gender { get; set; }
         //
-        [Required]
         [DisplayName("Image")]
         public string img { get; set; }
+
+        [DisplayName("CV")]
+
         public string PdfFile { get; set; }
     }
 }

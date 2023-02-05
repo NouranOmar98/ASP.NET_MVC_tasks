@@ -7,10 +7,10 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "TaskEmployees", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>TaskEmployee</h4>
         <hr />
@@ -74,7 +74,26 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.img, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img style="width:200px; margin-bottom:10px;" src="@Url.Content("~/Images/" + Model.img)" alt="Image" />
+                <br />
+                <input type="file" id="img" accept=".png" name="img" />
 
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PdfFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <a href="../../TaskEmployees/Download?cv=@Url.Content( Model.PdfFile)">@Model.PdfFile</a>
+                <br />
+                <input type="file" id="File" name="File" />
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

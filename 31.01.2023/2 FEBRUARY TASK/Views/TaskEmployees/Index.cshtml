@@ -91,8 +91,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Job_Title)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Gender)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.img)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PdfFile)
             </th>
             <th></th>
         </tr>
@@ -132,7 +140,7 @@
                     <img src="../Images/@item.img" style="width:100px;" />
                 </td>
                 <td>
-                    <a href="TaskEmployees/Download?CV=@item.PdfFile">@item.PdfFile</a>
+                    <a href="../TaskEmployees/Download?CV=@item.PdfFile">@item.PdfFile</a>
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" }) |

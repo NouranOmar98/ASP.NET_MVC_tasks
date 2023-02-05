@@ -72,6 +72,19 @@
                 <span>Female</span>
             }
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.img)
+        </dt>
+
+        <dd>
+            <img style="width:200px;" src="@Url.Content("~/Images/" + Model.img)" alt="Image" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PdfFile)
+        </dt>
+        <dd>
+            <a href="../../TaskEmployees/Download?cv=@Url.Content( Model.PdfFile)">@Model.PdfFile</a>
+        </dd>
 
     </dl>
 </div>
