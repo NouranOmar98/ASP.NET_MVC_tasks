@@ -137,7 +137,12 @@ namespace _2_FEBRUARY_TASK.Controllers
         public ActionResult Edit(TaskEmployee taskEmployee, HttpPostedFileBase img, HttpPostedFileBase File)
         {
             TaskEmployee emp = db.TaskEmployees.Find(taskEmployee.Id);
-
+            emp.First_Name = Request["First_Name"];
+            emp.Last_Name = Request["Last_Name"];
+            emp.Email = Request["Email"];
+            emp.Phone = Request["Phone"];
+            emp.Age = int.Parse(Request["Age"]);
+            emp.Phone = Request["Phone"];
             if ( img!= null)
             {
                 string path = Server.MapPath("../../Images/") + img.FileName;
@@ -151,7 +156,6 @@ namespace _2_FEBRUARY_TASK.Controllers
                 File.SaveAs(path);
                 emp.PdfFile = File.FileName;
             }
-
 
             if (ModelState.IsValid)
             {

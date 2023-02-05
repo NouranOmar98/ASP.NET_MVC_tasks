@@ -1,0 +1,3 @@
+Partial View without Model
+use Partial in Model and make ParialtViewResult
+MasterPage
