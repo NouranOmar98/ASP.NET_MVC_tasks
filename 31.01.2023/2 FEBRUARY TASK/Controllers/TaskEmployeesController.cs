@@ -20,6 +20,38 @@ namespace _2_FEBRUARY_TASK.Controllers
             return View(db.TaskEmployees.ToList());
         }
 
+        [HttpGet]
+        public ActionResult Index(string searchString, string searchBy)
+        {
+            //var taskEmployees = from t in db.TaskEmployees select t;
+            var taskEmployees = from t in db.TaskEmployees select t;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                switch (searchBy)
+                {
+                    case "First Name":
+                        taskEmployees = taskEmployees.Where(s => s.First_Name.Contains(searchString));
+                        break;
+                    case "Last Name":
+                        taskEmployees = taskEmployees.Where(s => s.Last_Name.Contains(searchString));
+                        break;
+                    case "Email":
+                        taskEmployees = taskEmployees.Where(s => s.Email.Contains(searchString));
+                        break;
+                    default:
+                        taskEmployees = taskEmployees.Where(s => s.First_Name.Contains(searchString) || s.Last_Name.Contains(searchString) || s.Job_Title.Contains(searchString) || s.Age.ToString().Equals(searchString));
+                        break;
+                }
+            }
+            if (taskEmployees.ToList().Count <= 0 || searchString == "")
+            {
+                ViewBag.SearchString = "Not Found";
+            }
+            return View(taskEmployees.ToList());
+        }
+
+
         // GET: TaskEmployees/Details/5
         public ActionResult Details(int? id)
         {
@@ -41,21 +73,44 @@ namespace _2_FEBRUARY_TASK.Controllers
             return View();
         }
 
+
         // POST: TaskEmployees/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,First_Name,Last_Name,Email,Phone,Age,Job_Title,Gender")] TaskEmployee taskEmployee)
+        public ActionResult Create(TaskEmployee taskEmployee , HttpPostedFileBase img , HttpPostedFileBase File)
+
         {
-            if (ModelState.IsValid)
+            if ( img!= null)
             {
-                db.TaskEmployees.Add(taskEmployee);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string path = Server.MapPath("../Images/") + img.FileName;
+                img.SaveAs(path);
+                taskEmployee.img = img.FileName;
             }
 
+            if (File != null)
+            {
+                string path = Server.MapPath("../CV/") + File.FileName;
+                File.SaveAs(path);
+                taskEmployee.PdfFile = File.FileName;
+            }
+
+            db.TaskEmployees.Add(taskEmployee);
+            db.SaveChanges();
             return View(taskEmployee);
+
+           
+        }
+
+
+        public FileResult Download(string CV)
+        {
+            string name="../CV/"+CV ; 
+            string path = Server.MapPath(name);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, "application.pdf", CV);
+            
         }
 
         // GET: TaskEmployees/Edit/5

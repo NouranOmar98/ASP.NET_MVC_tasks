@@ -17,6 +17,8 @@
           <Property Name="Age" Type="int" />
           <Property Name="Job Title" Type="nvarchar" MaxLength="100" />
           <Property Name="Gender" Type="bit" />
+          <Property Name="img" Type="varchar(max)" />
+          <Property Name="PdfFile" Type="varchar(max)" />
         </EntityType>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="TaskEmployees" EntityType="Self.TaskEmployees" Schema="dbo" store:Type="Tables" />
@@ -38,6 +40,8 @@
           <Property Name="Age" Type="Int32" />
           <Property Name="Job_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="Boolean" />
+          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PdfFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="TaskEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TaskEmployees" EntityType="Self.TaskEmployee" />
@@ -59,6 +63,8 @@
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Job_Title" ColumnName="Job Title" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="PdfFile" ColumnName="PdfFile" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

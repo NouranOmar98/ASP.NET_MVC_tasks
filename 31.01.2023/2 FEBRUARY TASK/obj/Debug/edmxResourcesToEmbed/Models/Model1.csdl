@@ -12,6 +12,8 @@
     <Property Name="Age" Type="Int32" />
     <Property Name="Job_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Gender" Type="Boolean" />
+    <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PdfFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="TaskEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="TaskEmployees" EntityType="Self.TaskEmployee" />

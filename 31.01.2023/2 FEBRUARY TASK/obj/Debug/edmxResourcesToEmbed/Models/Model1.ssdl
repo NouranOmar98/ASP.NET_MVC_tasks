@@ -12,6 +12,8 @@
     <Property Name="Age" Type="int" />
     <Property Name="Job Title" Type="nvarchar" MaxLength="100" />
     <Property Name="Gender" Type="bit" />
+    <Property Name="img" Type="varchar(max)" />
+    <Property Name="PdfFile" Type="varchar(max)" />
   </EntityType>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="TaskEmployees" EntityType="Self.TaskEmployees" Schema="dbo" store:Type="Tables" />
